@@ -9,11 +9,28 @@ Rails.application.routes.draw do
     get 'customers/mypage' => 'customers#show'
     get 'customers/edit'
     get 'customers/unsubscribe'
+    patch 'customers/withdraw' => 'customers#withdraw'
+    resources :customers, only: [:update]
   end
 
    scope module: 'public' do
+    get 'items/:id' => 'items#show', as: 'item'
     get 'items' => 'items#index'
-    get 'items/show'
+  end
+
+  scope module: 'public' do
+    resources :addresses, only: [:index, :create, :edit, :update, :destroy]
+  end
+
+  scope module: 'public' do
+    delete 'cart_items/destroy_all' => 'cart_items#destroy_all', as: 'destroy_all'
+    resources :cart_items, only: [:index, :create, :update, :destroy]
+  end
+
+  scope module: 'public' do
+    post 'orders/confirm' => 'orders#confirm'
+    get 'orders/thanks' => 'orders#thanks'
+    resources :orders, only: [:new, :index, :show, :create]
   end
 
 
