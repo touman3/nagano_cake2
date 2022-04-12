@@ -6,8 +6,13 @@
     <div class="col-md-8">
     </div>
   </div>
-
   </br>
+
+  <div class="text-danger">
+    <% if @genre.errors.any? %>
+      エラーが発生しました
+    <% end %>
+  </div>
 
   <%= form_with model:@genre, url:admin_genres_path, method: :post, local: true do |f| %>
     <div class="form-group row">

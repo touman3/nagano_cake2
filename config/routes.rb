@@ -1,10 +1,11 @@
 Rails.application.routes.draw do
 
- # 顧客用
+# 顧客用
   scope module: 'public' do
     root to: 'homes#top'
     get 'about' => 'homes#about'
   end
+
   scope module: 'public' do
     get 'customers/mypage' => 'customers#show'
     get 'customers/edit'
@@ -48,6 +49,13 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :genres, only: [:index, :create, :edit, :update]
   end
+  namespace :admin do
+    resources :orders, only: [:show, :update]
+  end
+  namespace :admin do
+    resources :order_details, only: [:update]
+  end
+
 # 顧客用
 # URL /customers/sign_in ...
 devise_for :customers,skip: [:passwords], controllers: {

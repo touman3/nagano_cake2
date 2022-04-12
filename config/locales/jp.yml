@@ -10,7 +10,6 @@
           making: "製作中"
           preparation: "発送準備中"
           shipped: "発送済"
-          shipped: "発送済"
 
       order_detail:
         making_status:

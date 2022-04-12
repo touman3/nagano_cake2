@@ -1,4 +1,6 @@
 class Public::OrdersController < ApplicationController
+  before_action :authenticate_customer!
+
   def new
     @order = Order.new
     @customer = current_customer
@@ -44,8 +46,6 @@ class Public::OrdersController < ApplicationController
     end
     @cart_items.destroy_all
     redirect_to orders_thanks_path
-
-
   end
 
   def index
@@ -62,10 +62,10 @@ class Public::OrdersController < ApplicationController
   private
 
   def order_params
-      params.require(:order).permit(:postal_code, :address, :name, :shipping_cost, :total_payment, :payment_method)
+    params.require(:order).permit(:postal_code, :address, :name, :shipping_cost, :total_payment, :payment_method)
   end
 
   def order_detail_params
-      params.require(:order_detail).permit(:price, :amount)
+    params.require(:order_detail).permit(:price, :amount)
   end
 end
